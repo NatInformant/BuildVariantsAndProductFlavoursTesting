@@ -16,8 +16,20 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures{
+    buildFeatures {
         viewBinding = true
+    }
+
+    flavorDimensions += listOf("version")
+    productFlavors {
+        create("Test1") {
+            applicationIdSuffix = ".test"
+            dimension = "version"
+        }
+        create("Production") {
+            applicationIdSuffix = ".production"
+            dimension = "version"
+        }
     }
 
     buildTypes {
@@ -29,7 +41,6 @@ android {
             )
         }
     }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

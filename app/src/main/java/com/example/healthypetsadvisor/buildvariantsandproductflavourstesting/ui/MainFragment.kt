@@ -1,26 +1,21 @@
 package com.example.healthypetsadvisor.buildvariantsandproductflavourstesting.ui
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.healthypetsadvisor.buildvariantsandproductflavourstesting.R
+import com.example.healthypetsadvisor.buildvariantsandproductflavourstesting.databinding.FragmentMainBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(R.layout.fragment_main) {
 
-    private val viewModel: MainViewModel by viewModels()
+    private val binding: FragmentMainBinding by viewBinding()
+    private val viewModel: MainViewModel by viewModel()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.userInfo.observe(viewLifecycleOwner) {
+            binding.userInfo.text = it
+        }
     }
 }
